@@ -57,7 +57,7 @@ import {resolveData} from './operators/resolve_data';
 import {switchTap} from './operators/switch_tap';
 import {TitleStrategy} from './page_title_strategy';
 import {RouteReuseStrategy} from './route_reuse_strategy';
-import {ROUTER_CONFIGURATION} from './router_config';
+import {InMemoryScrollingOptions, ROUTER_CONFIGURATION} from './router_config';
 import {RouterConfigLoader} from './router_config_loader';
 import {ChildrenOutletContexts} from './router_outlet_context';
 import {
@@ -197,7 +197,7 @@ export interface UrlCreationOptions {
  *
  * @publicApi
  */
-export interface NavigationExtras extends UrlCreationOptions, NavigationBehaviorOptions {}
+export interface NavigationExtras extends UrlCreationOptions, NavigationBehaviorOptions, InMemoryScrollingOptions {}
 
 export type RestoredState = {
   [k: string]: any;

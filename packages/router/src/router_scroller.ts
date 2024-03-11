@@ -84,17 +84,19 @@ export class RouterScroller implements OnDestroy {
     return this.transitions.events.subscribe((e) => {
       if (!(e instanceof Scroll)) return;
       // a popstate event. The pop state event will always ignore anchor scrolling.
+      const scrollPositionRestoration = this.transitions.currentNavigation?.extras?.scrollPositionRestoration ?? this.options.scrollPositionRestoration;
+      const anchorScrolling = this.transitions.currentNavigation?.extras?.anchorScrolling ?? this.options.anchorScrolling;
       if (e.position) {
-        if (this.options.scrollPositionRestoration === 'top') {
+        if (scrollPositionRestoration === 'top') {
           this.viewportScroller.scrollToPosition([0, 0]);
-        } else if (this.options.scrollPositionRestoration === 'enabled') {
+        } else if (scrollPositionRestoration === 'enabled') {
           this.viewportScroller.scrollToPosition(e.position);
         }
         // imperative navigation "forward"
       } else {
-        if (e.anchor && this.options.anchorScrolling === 'enabled') {
+        if (e.anchor && anchorScrolling === 'enabled') {
           this.viewportScroller.scrollToAnchor(e.anchor);
-        } else if (this.options.scrollPositionRestoration !== 'disabled') {
+        } else if (scrollPositionRestoration !== 'disabled') {
           this.viewportScroller.scrollToPosition([0, 0]);
         }
       }
